@@ -1,0 +1,42 @@
+.header{
+    .header__logo{
+        font-weight: bold;
+        font-size: 26px;
+        color: white;
+        padding-bottom: 20px;
+    }
+
+    .header__menu {
+      .header__menu_title{
+        margin: 50px 0;
+        padding-left: 14px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      .header__menu_item {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-size: 18px;
+        margin-bottom: 40px;
+        transition: all 0.3s ease;
+        border-left: 4px solid transparent;
+        padding-left: 10px;
+        svg{
+          padding-right: 10px;
+          height: 35px;
+          width: 35px;
+        }
+        &:hover{
+          border-left: 4px solid #6780c0;
+          .header__menu_item_title{
+            color: white;
+          }
+          svg{
+            color: #6780c0;
+          }
+        }
+      }
+    }
+}
