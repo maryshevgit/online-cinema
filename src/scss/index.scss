@@ -69,7 +69,11 @@ font-weight: 400;
 
 .wrapper{
     display: grid;
-    grid-template-columns: 200px 1fr 400px;
-    padding: 20px
+    grid-template-columns: 250px 1fr 400px;
+    padding: 20px;
+    .content{
+        padding-left: 50px;
+    }
 }
+
     

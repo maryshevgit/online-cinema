@@ -1,0 +1,177 @@
+.movie{
+    position: relative;
+    .movie__back{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-position: top;
+        background-size: cover;
+        background-repeat: no-repeat;
+        opacity: 0.2;
+        border-radius: 20px;
+    }
+
+    .movie__body{
+        padding: 40px;
+        display: flex;
+        gap: 30px;
+        .movie__img{
+            z-index: 10;
+            img{
+                height: 600px;
+                width: 400px;
+                border-radius: 20px;
+            }
+        }
+
+        .movie__info{
+            z-index: 10;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            .movie__info_title{
+                font-size: 26px;
+            }
+            .movie__info_desc{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 18px;
+                flex-wrap: wrap;
+                .info__desc_adult{
+                    border: 1px solid ;
+                    color: #8f8999;
+                    padding: 3px;
+                }
+                .dot{
+                    height: 6px;
+                    width: 6px;
+                    background-color: white;
+                    border-radius: 50%;
+                }
+                .info__desc_genres{
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+            }
+
+            .movie__info_navigation{
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                .movie__info_vote{
+                    width: 80px;
+                    height: 80px;
+                    position: relative;
+                    .outer{
+                        height: 80px;
+                        width: 80px;
+                        border-radius: 50%;
+                        padding: 10px;
+                        .inner{
+                            height: 60px;
+                            width: 60px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            #number{
+                                font-weight: bold;
+                                font-size: 18px;
+                            }
+                        }
+                    }
+                    .circle{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        circle{
+                            fill: none;
+                            stroke: url(#GradientColor);
+                            stroke-width: 10px;
+                        }
+                    }
+                }
+                .movie__info_vote_users{
+                    text-transform: capitalize;
+                    font-size: 16px;
+                    font-weight: 500;
+                    width: 50px;
+                }
+                .movie__info_func{
+                    width: 50px;
+                    height: 50px;
+                    background-color: #032541;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    svg{
+                        transition: all 0.3s ease;
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+                .list:hover{
+                    svg{
+                        color: rgb(0, 255, 17);
+                    }
+                }
+                .heart:hover{
+                    svg{
+                        color: #ef47b6;
+                    }
+                }
+                .bookmark:hover{
+                    svg{
+                        color: #cf3131;
+                    }
+                }
+                .star:hover{
+                    svg{
+                        color: yellow;
+                    }
+                }
+            }
+            .movie__info_trailer{
+                display: flex;
+                align-items: center;
+                font-size: 18px;
+                font-weight: 500;
+                cursor: pointer;
+                svg{
+                    width: 30px;
+                    height: 30px;
+                    margin-right: 5px;
+                }
+                &:hover{
+                    color: rgb(173, 171, 171);
+                    transition: all 0.3s ease;
+                    svg{
+                        transition: all 0.3s ease;
+                        color: rgb(173, 171, 171);
+                    }
+                }
+            }
+
+            .movie__info_tagline{
+                font-size: 18px;
+                color: #bdb7b7;
+                font-style: italic;
+            }
+
+            .movie__info_overview{
+                font-size: 18px;
+                .movie__info_overview_title{
+                    font-size: 20px;
+                    font-weight: 600;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}

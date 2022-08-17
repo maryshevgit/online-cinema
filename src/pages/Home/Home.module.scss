@@ -1,0 +1,17 @@
+.home{
+    .home__title{
+        display: flex;
+        align-items: center;
+        color: white;
+        font-size: 24px;
+        padding: 20px 0;
+        .home__icon{
+            margin-left: 10px;
+            color: rgb(255, 0, 0);
+        }
+        .star{
+            color: yellow;
+        }
+    }
+    
+}

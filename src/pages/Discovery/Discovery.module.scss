@@ -1,0 +1,45 @@
+.discovery{
+    .discovery__title{
+        color: white;
+        font-size: 26px;
+        margin-bottom: 5px;
+    }
+    .discovery__text{
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+}
+
+.genres{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    .genre{
+        position: relative;
+        cursor: pointer;
+
+        img{
+            width: 200px;
+            height: 300px;
+        }
+        .genre__name {
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 20px;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+        &:hover{
+
+            .genre__img {
+                opacity: 0.4;
+                transition: all 0.2s ease;
+            }
+            .genre__name{
+                display: block;
+            }
+        }
+    }
+}

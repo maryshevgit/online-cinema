@@ -1,16 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Header.module.scss'
 import { authLinks, links } from './links'
-import {useNavigate} from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
+import { SiKinopoisk } from "react-icons/si";
 
 const Header = () => {
     const isAuth = true
+    const [active, setActive] = useState('')
+    const location = useLocation()
 
     const navigate = useNavigate()
+
+    const handleLink = (link: string):void => {
+        navigate(link)
+        setActive(link)
+    }
 
   return (
     <div className={styles.header}>
         <div className={styles.header__logo}>
+            <SiKinopoisk />
             Online Cinema
         </div>
         <div className={styles.header__menu}>
@@ -18,12 +27,10 @@ const Header = () => {
                 Menu
             </div>
             {links.map(link => 
-                <div>
-                    <div className={styles.header__menu_item} onClick={() => navigate(link.navigate)}>
-                        {link.icon}
-                        <div className={styles.header__menu_item_title}>
-                            {link.name}
-                        </div>
+                <div key={link.name} className={`${styles.header__menu_item} ${active === link.navigate && styles.active} ${location.pathname === link.navigate && styles.active}`} onClick={() => handleLink(link.navigate)}>
+                    {link.icon}
+                    <div className={styles.header__menu_item_title}>
+                        {link.name}
                     </div>
                 </div>
             )}
@@ -33,9 +40,9 @@ const Header = () => {
             {isAuth ?
                 <div>
                     {authLinks.map(link => 
-                        <div>
+                        <div key={link.name} >
                             {link.auth && 
-                                <div className={styles.header__menu_item} onClick={() => navigate(link.navigate)}>
+                                <div className={`${styles.header__menu_item} ${active === link.navigate && link.name !== 'Logout' && styles.active} ${location.pathname === link.navigate && link.name !== 'Logout' && styles.active}`} onClick={() => handleLink(link.navigate)}>
                                     {link.icon}
                                     <div className={styles.header__menu_item_title}>
                                         {link.name}
@@ -48,9 +55,9 @@ const Header = () => {
                 :
                 <div>
                     {authLinks.map(link => 
-                        <div>
+                        <div key={link.name} >
                             {!link.auth && 
-                                <div className={styles.header__menu_item} onClick={() => navigate(link.navigate)}>
+                                <div className={`${styles.header__menu_item} ${active === link.navigate && styles.active} ${location.pathname === link.navigate && styles.active}`} onClick={() => handleLink(link.navigate)}>
                                     {link.icon}
                                     <div className={styles.header__menu_item_title}>
                                         {link.name}

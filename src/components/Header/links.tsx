@@ -10,12 +10,12 @@ export const links = [
     {name: 'Home', navigate: '/', icon: <BsHouseDoor />},
     {name: 'Discovery', navigate: '/discovery', icon: <BsCompass />},
     {name: 'Fresh movies', navigate: '/fresh', icon: <IoMdRefresh />},
-    {name: 'Trending now', navigate: '/trend', icon: <ImFire />},
+    {name: 'Trending now', navigate: '/trends', icon: <ImFire />},
 ]
 
 export const authLinks = [
     {name: 'Profile', auth: true, navigate: '/profile', icon: <IoSettingsOutline />},
-    {name: 'Logout', auth: true, navigate: '/auth', icon: <FiLogOut />},
-    {name: 'Login', auth: false, navigate: '/auth', icon: <FiLogIn />},
+    {name: 'Logout', auth: true, navigate: '/login', icon: <FiLogOut />},
+    {name: 'Login', auth: false, navigate: '/login', icon: <FiLogIn />},
 ]
 
