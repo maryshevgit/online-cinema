@@ -22,8 +22,6 @@ const Movies = () => {
     getMovies()
   }, [genre_id])
 
-  console.log(movies)
-
   return (
     <div className={styles.movies}>
       {movies.map(movie => 

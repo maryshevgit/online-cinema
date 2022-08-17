@@ -29,7 +29,7 @@ const Discovery = () => {
   }, [])
 
   const getMovies = (id:number) => {
-    navigate('/movies')
+    navigate('movies')
     dispatch(getGenre(id))
   }
 

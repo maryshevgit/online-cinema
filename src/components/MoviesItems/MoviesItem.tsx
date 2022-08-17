@@ -1,4 +1,4 @@
-import React, { createRef, useRef, useState } from 'react'
+import React from 'react'
 import styles from './MoviesItem.module.scss'
 import { IMovie } from '../../types'
 import { baseUrl } from '../../utils/requests'

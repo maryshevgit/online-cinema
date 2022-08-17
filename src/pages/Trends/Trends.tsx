@@ -20,8 +20,6 @@ const Trends = () => {
     getTrendsMovies()
   }, [])
 
-  console.log(movies)
-
   return (
     <div>
       <div className={styles.trends__title}>
