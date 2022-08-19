@@ -11,6 +11,7 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import movieIdSlice from './slices/movieIdSlice'
+import movieReducer from './slices/movieSlice'
 
 const persistConfig = {
   key: 'root',
@@ -19,6 +20,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     movie: movieIdSlice,
+    movies: movieReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

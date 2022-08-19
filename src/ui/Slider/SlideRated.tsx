@@ -1,21 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { IMovie } from '../../types'
 import { baseUrl } from '../../utils/requests'
 import styles from './Slider.module.scss'
 import 'swiper/scss';
-import { useAppDispatch } from '../../hooks/reduxHook'
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook'
 import { useNavigate } from 'react-router-dom'
 import { getId } from '../../redux/slices/movieIdSlice'
+import { fetchRatedMovies } from '../../redux/slices/movieSlice'
 
-
-interface Props {
-    movies: IMovie[]
-}
-
-const SlideRated = ({movies}: Props) => {
+const SlideRated = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const movies = useAppSelector(state => state.movies.ratedMovies)
+
+    useEffect(() => {
+        dispatch(fetchRatedMovies())
+    }, [dispatch])
+
 
     const getOneMovie = async(id:number) => {
         dispatch(getId(id))

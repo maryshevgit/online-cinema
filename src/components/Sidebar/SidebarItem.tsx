@@ -24,6 +24,7 @@ const SidebarItem = ({movie}: Props) => {
         navigate(`movie/${movie_id}`)
     }
 
+
   return (
     <div className={styles.sidebar__item} onClick={() => getOneMovie(movie.id)}>
         <img src={baseUrl+movie.poster_path} alt={movie.title} />

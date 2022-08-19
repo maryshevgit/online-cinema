@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useAppSelector } from '../../hooks/reduxHook'
-import { IMovie } from '../../types'
+import React, { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook'
 import { baseUrl } from '../../utils/requests'
 import styles from './MoviePage.module.scss'
 import {ReactComponent as Circle} from '../../assets/circle.svg'
@@ -9,41 +8,19 @@ import { AiFillHeart } from "react-icons/ai";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { MdStarRate } from "react-icons/md";
 import { FaPlayCircle } from "react-icons/fa";
-const API_KEY = process.env.REACT_APP_API_KEY
+import { runtimeOfMovie } from '../../utils/runtimeOfMovie'
+import { fetchMoviePage } from '../../redux/slices/movieSlice'
 
 const MoviePage = () => {
-    const [movie, setMovie] = useState<IMovie>()
+    const dispatch = useAppDispatch()
 
     const movie_id = useAppSelector(state => state.movie.id)
+    const movie = useAppSelector(state => state.movies.movie)
 
     useEffect(() => {
-        const getMovie = async() => {
-            try{
-                const genres = await Promise.all([
-                fetch(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${API_KEY}&language=en-US`)
-                .then((res) => res.json())
-                .then((res) => res)
-                ])
-                setMovie(genres[0])
-            }catch(error) {
-                console.log(`Ошибка при получении Movie: ${error}`)
-            }
-        }
-
-        getMovie()
-    }, [movie_id])
-
-    let runtime
-
-    if(movie?.runtime){
-        let hours = Math.trunc(movie?.runtime/60);
-        let minutes = movie?.runtime % 60;
-        if(hours > 0){
-            runtime = hours + 'h ' + minutes + 'm';
-        } else {
-            runtime = minutes + 'm';
-        }
-    }
+        dispatch(fetchMoviePage(movie_id))
+    }, [dispatch, movie_id])
+    
 
     const background = baseUrl+((movie?.backdrop_path ? movie?.backdrop_path : movie?.poster_path))
     const vote = movie && Math.floor(movie?.vote_average * 10)
@@ -86,7 +63,7 @@ const MoviePage = () => {
                     </div>
                     {movie?.genres?.length !== 1 && <div className={styles.dot}></div>}
                     <div className={styles.movie__info_runtime}>
-                        {runtime}
+                        {movie && runtimeOfMovie(movie)}
                     </div>
                 </div>
                 <div className={styles.movie__info_navigation}>

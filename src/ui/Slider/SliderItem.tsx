@@ -29,7 +29,7 @@ const SliderItem = ({movie}: Props) => {
             <div className={styles.slider__item_background} style={{backgroundImage: `url(${background})`}}></div>
             <div className={styles.slider__item_body}>
                 <div className={styles.slider__item_img}>
-                    <img src={baseUrl+movie.poster_path} alt={movie.title} />
+                    <img src={baseUrl+movie.poster_path || baseUrl+movie.backdrop_path} alt={movie.title} />
                 </div>
                 <div className={styles.slider__item_info}> 
                     <div className={styles.slider__item_info_rating}>
@@ -37,7 +37,7 @@ const SliderItem = ({movie}: Props) => {
                         {(movie.vote_average).toFixed(1)}
                     </div>
                     <div className={styles.slider__item_info_title}>
-                        {movie.title}
+                        {movie.title || movie.name}
                         <button className={styles.button} onClick={() => getOneMovie(movie.id)}>
                             Watch
                         </button>

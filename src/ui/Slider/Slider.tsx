@@ -1,17 +1,21 @@
-import React from 'react'
-import { IMovie } from '../../types'
+import React, { useEffect } from 'react'
 import SwiperCore, { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './Slider.module.scss'
 import 'swiper/scss';
 import SliderItem from './SliderItem';
 import 'swiper/css/autoplay'
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
+import { fetchTrendingMovies } from '../../redux/slices/movieSlice';
 
-interface Props {
-    movies: IMovie[]
-}
+const Slider = () => {
+    const dispatch = useAppDispatch()
+    const movies = useAppSelector(state => state.movies.trendingMovies)
 
-const Slider = ({movies}: Props) => {
+    useEffect(() => {
+        dispatch(fetchTrendingMovies(4))
+    }, [dispatch])
+
     SwiperCore.use([Autoplay]);
 
   return (
@@ -27,7 +31,7 @@ const Slider = ({movies}: Props) => {
                     disableOnInteraction: false,
                 }}
             >
-            {
+            {movies &&
                 movies.map((movie, i) => (
                     <SwiperSlide key={i}>
                         {({ isActive }) => (

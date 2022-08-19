@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import MoviesItems from '../../components/MoviesItems/MoviesItem'
-import { IMovie } from '../../types'
-import requests from '../../utils/requests'
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook'
+import { fetchFreshMovies } from '../../redux/slices/movieSlice'
 import styles from './FreshMovies.module.scss'
 
 const FreshMovies = () => {
-  const [movies, setMovies] = useState<IMovie[]>([])
+  const dispatch = useAppDispatch()
+  const movies = useAppSelector(state => state.movies.movies)
 
   useEffect(() => {
-    const getFreshMovies = async() => {
-      const popularMovies = await Promise.all([
-        fetch(requests.fetchFreshMovies)
-        .then((res) => res.json())
-        .then((res) => res.results)
-      ])
-      setMovies(...popularMovies)
-    } 
-
-    getFreshMovies()
-  }, [])
+    dispatch(fetchFreshMovies())
+  }, [dispatch])
 
   return (
     <div >

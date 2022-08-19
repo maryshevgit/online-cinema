@@ -1,26 +1,18 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect } from 'react'
 import styles from './Sidebar.module.scss'
 import { AiOutlineSearch } from "react-icons/ai";
-import { IMovie } from '../../types';
-import requests from '../../utils/requests';
 import SidebarItem from './SidebarItem';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
+import { fetchPopularMovies } from '../../redux/slices/movieSlice';
 
 const SideBar:FC = () => {
-  const [movies, setMovies] = useState<IMovie[]>([])
+  const dispatch = useAppDispatch()
+  const movies = useAppSelector(state => state.movies.popularMovies)
 
   useEffect(() => {
-    const getPopularMovies = async() => {
-      const popularMovies = await Promise.all([
-        fetch(requests.fetchPopularMovies)
-        .then((res) => res.json())
-        .then((res) => res.results.slice(0, 3))
-      ])
-      setMovies(...popularMovies)
-    } 
-
-    getPopularMovies()
-  }, [])
-
+    dispatch(fetchPopularMovies())
+  }, [dispatch])
+  
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebar__input}>

@@ -1,32 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '../../hooks/reduxHook'
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook'
 import { getGenre } from '../../redux/slices/movieIdSlice'
-import { IGenres } from '../../types'
-import requests, { baseUrl } from '../../utils/requests'
+import { fetchGenres } from '../../redux/slices/movieSlice'
+import { baseUrl } from '../../utils/requests'
 import styles from './Discovery.module.scss'
 
 const Discovery = () => {
-  const [genres, setGenres] = useState<IGenres[]>([])
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const genres = useAppSelector(state => state.movies.genres)
 
   useEffect(() => {
-    const getGenres = async() => {
-      try{
-        const genres = await Promise.all([
-          fetch(requests.fetchGenres)
-          .then((res) => res.json())
-          .then((res) => res)
-        ])
-        setGenres(genres[0])
-      }catch(error) {
-        console.log(`Ошибка при получении Genres: ${error}`)
-      }
-    }
-
-    getGenres()
-  }, [])
+    dispatch(fetchGenres())
+  }, [dispatch])
 
   const getMovies = (id:number) => {
     navigate('movies')
